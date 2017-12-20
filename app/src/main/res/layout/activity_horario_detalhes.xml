@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.unitins.quadro.quadrodehorarios.views.activity.HorarioDetalhes">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/dethor_relative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/dethor_sala"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="15dp"
+                android:text="Sala"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/dethor_semestre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_sala"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:text="semestre"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_curso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_semestre"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="curso"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_periodo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_curso"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Periodo"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_dia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_periodo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="segunda"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_turno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_dia"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="turno"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_horario1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_turno"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="1 horario"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_intervalo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_horario1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="intervalo"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_horario2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_intervalo"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="2 horario"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_professor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_horario2"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="professor"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/dethor_local"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dethor_professor"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="local"
+                android:textSize="18sp" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+</RelativeLayout>

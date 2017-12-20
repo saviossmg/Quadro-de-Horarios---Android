@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/celnot_bordinfe"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:layout_below="@+id/celnot_central"
+        app:srcCompat="@color/botoes2" />
+
+    <ImageView
+        android:id="@+id/celnot_bordsup"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        app:srcCompat="@color/botoes2" />
+
+    <ImageView
+        android:id="@+id/celnot_bordesq"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/celnot_bordinfe"
+        android:layout_below="@+id/celnot_bordsup"
+        app:srcCompat="@color/botoes2" />
+
+    <ImageView
+        android:id="@+id/celnot_borddir"
+        android:layout_width="8dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/celnot_bordinfe"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/celnot_bordsup"
+        app:srcCompat="@color/botoes2" />
+
+
+    <LinearLayout
+        android:id="@+id/celnot_central"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/celnot_bordsup"
+        android:layout_toEndOf="@+id/celnot_bordesq"
+        android:layout_toLeftOf="@+id/celnot_borddir"
+        android:layout_toRightOf="@+id/celnot_bordesq"
+        android:layout_toStartOf="@+id/celnot_borddir"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/celnoticia_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/celnot_bordsup"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/celnot_bordesq"
+                android:layout_toRightOf="@+id/celnot_bordesq"
+                android:layout_weight="0.64"
+                android:text="titulo"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/celnoticia_subtitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:layout_marginTop="3dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="subtitulo"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/celnoticia_datapub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="0.5"
+                android:gravity="left"
+                android:text="data att"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/celnoticia_dataatt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="0.5"
+                android:text="data att"
+                android:textAlignment="center"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

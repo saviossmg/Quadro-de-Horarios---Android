@@ -1,0 +1,36 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentLocalizar">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+
+        <TextView
+            android:id="@+id/mapa_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:text="   Localizar"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <Spinner
+            android:id="@+id/mapa_select"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@+id/mapa_titulo"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="false"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/botoes3" />
+
+
+</RelativeLayout>

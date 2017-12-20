@@ -1,0 +1,137 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentHome">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentHome">
+
+        <TextView
+            android:id="@+id/mapa_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:text="   Inicio"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/about_txt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Bem vindo ao aplicativo de Quadro de Horários da UNITINS."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:layout_below="@+id/mapa_titulo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/about_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/about_txt1"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Para iniciar uma consulta, vá ao menu de consultas e informe o seu curso, periodo e semestre letivo."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/home_txt3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/about_txt2"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Caso deseje é possivel conseguir todos os horários de cursos de um campus, curso ou semestre em específico."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/home_txt4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/home_txt3"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Todos os resultados podem ser armazenados localmente, podendo ser editados e separados."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/home_txt5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/home_txt4"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Também é possivel ver as noticias da UNITINS, confira no menu de noticias."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/home_txt6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/home_txt5"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Bom uso!"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+    </RelativeLayout>
+
+
+</ScrollView>

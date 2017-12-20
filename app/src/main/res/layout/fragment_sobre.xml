@@ -1,0 +1,61 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentSobre">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentSobre">
+
+        <TextView
+            android:id="@+id/mapa_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            android:text="   About"
+            android:textAllCaps="true"
+            android:textSize="24sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/about_txt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/mapa_titulo"
+            android:layout_marginTop="10dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Este aplicativo tem como objetivo disponibilizar aos estudantes da Universidade Estadual do Tocantins (UNITINS), provendo aos estudantes e professores os horários e dias de aula das respectivas matérias ingressadas no semestre, consultando matérias, professores e também sendo possivel realizar uma busca pelo Google Maps o campus em que o aluno está ingressado."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/about_txt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/about_txt1"
+            android:layout_marginTop="21dp"
+            android:contextClickable="false"
+            android:elegantTextHeight="false"
+            android:freezesText="false"
+            android:text="Desenvolvido por: Sávio Martins, Estudante de Sistemas de Informação pela Universidade Estadual do Tocantins (UNITINS)."
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</ScrollView>

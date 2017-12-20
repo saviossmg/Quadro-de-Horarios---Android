@@ -1,0 +1,73 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_consultas"
+    tools:context="com.unitins.quadro.quadrodehorarios.views.fragments.FragmentConsultas">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/consultas_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="   Consultas - Alocação"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold|italic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ListView
+        android:id="@+id/consultas_listageral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/consultas_titulo"
+        android:layout_marginTop="15dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/consulta_btnpesquisar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/consulta_btnrecarregar"
+        android:layout_alignEnd="@+id/consulta_btnrecarregar"
+        android:layout_alignRight="@+id/consulta_btnrecarregar"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/busca"
+        android:clickable="true"
+        android:src="@drawable/busca"
+        app:backgroundTint="@color/colorAccent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/consulta_btnrecarregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/consulta_btnsincronizar"
+        android:layout_alignLeft="@+id/consulta_btnsincronizar"
+        android:layout_alignStart="@+id/consulta_btnsincronizar"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:src="@drawable/recarregar"
+        app:backgroundTint="@color/colorAccent" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/consulta_btnsincronizar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:clickable="true"
+        android:src="@drawable/sincronizar"
+        app:backgroundTint="@color/colorAccent" />
+
+
+</RelativeLayout>
