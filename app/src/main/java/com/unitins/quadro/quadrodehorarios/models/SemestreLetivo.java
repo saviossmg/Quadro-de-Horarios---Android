@@ -9,11 +9,15 @@ public class SemestreLetivo {
     private int id;
     private Semestre semestre;
     private Curso curso;
+    private int idsemestre;
+    private int idcurso;
 
     public SemestreLetivo() {
         this.id = id;
         this.semestre = semestre;
         this.curso = curso;
+        this.idsemestre = idsemestre;
+        this.idcurso = idcurso;
     }
 
     public int getId() {
@@ -38,5 +42,21 @@ public class SemestreLetivo {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public int getIdsemestre() {
+        return idsemestre;
+    }
+
+    public void setIdsemestre(int idsemestre) {
+        this.idsemestre = idsemestre;
+    }
+
+    public int getIdcurso() {
+        return idcurso;
+    }
+
+    public void setIdcurso(int idcurso) {
+        this.idcurso = idcurso;
     }
 }

@@ -41,7 +41,7 @@ public class AlocacaoSalaC {
 
     //LISTAR
     public ArrayList<AlocacaoSala> listar(Boolean pesquisa,int curso, int semestre, int periodo,
-                      int sala, String turno, String dia, Boolean refresh) throws ParseException {
+                      int sala, int turno, int dia, Boolean refresh) throws ParseException {
 
         ArrayList<AlocacaoSala> result = new ArrayList<AlocacaoSala>();
         cursor = db.query("AlocacaoSala", new String[]{"id", "semestre", "sala", "oferta"},
@@ -54,6 +54,7 @@ public class AlocacaoSalaC {
             //preenche o objeto
             alocSala.setSemestre(findSemLetivo.findById(cursor.getInt(1)));
             alocSala.setSala(findSala.findById(cursor.getInt(2)));
+            int aa = cursor.getInt(3);
             alocSala.setOferta(findOferta.findById(cursor.getInt(3)));
             result.add(alocSala);
             cursor.moveToNext();
@@ -71,8 +72,21 @@ public class AlocacaoSalaC {
             if(semestre != 0) args++;
             if(periodo != -1) args++;
             if(sala != 0) args++;
-            if(!turno.equals("TURNO")) args++;
-            if(!dia.equals("DIA")) args++;
+            if(turno != 0) args++;
+            if(dia != 0) args++;
+            String auxdia = "";
+            String auxturno = "";
+            //dias
+            if(dia==13) auxdia = "Segunda-Feira";
+            if(dia==14) auxdia = "Terça-Feira";
+            if(dia==15) auxdia = "Quarta-Feira";
+            if(dia==16) auxdia = "Quinta-Feira";
+            if(dia==17) auxdia = "Sexta-Feira";
+            if(dia==18) auxdia = "Sábado";
+            //turnos
+            if(dia==9) auxturno = "Matutino";
+            if(dia==10) auxturno = "Vespertino";
+            if(dia==11) auxturno = "Noturno";
 
             for (AlocacaoSala aux: result) {
                 int soma = 0;
@@ -81,8 +95,8 @@ public class AlocacaoSalaC {
                 if(aux.getSemestre().getSemestre().getId() == semestre) soma++;
                 if(aux.getOferta().getPeriodo() == periodo) soma++;
                 if(aux.getSala().getId() == sala) soma++;
-                if(aux.getOferta().getTurno().equals(turno)) soma++;
-                if(aux.getOferta().getDiaSemana().equals(dia)) soma++;
+                if(aux.getOferta().getTurno().equals(auxturno)) soma++;
+                if(aux.getOferta().getDiasemana().equals(auxdia)) soma++;
 
                 //verifica a soma
                 if(soma == args) copia.add(aux);
@@ -117,16 +131,20 @@ public class AlocacaoSalaC {
     public void inserir(AlocacaoSala dados) {
         ContentValues cv = new ContentValues();
         cv.put("id", dados.getId());
-        cv.put("semestre", dados.getSemestre().getId());
-        cv.put("sala", dados.getSala().getId());
-        cv.put("oferta", dados.getOferta().getId());
+        cv.put("semestre", dados.getIdsemestre());
+        cv.put("sala", dados.getIdsala());
+        cv.put("oferta", dados.getIdoferta());
         db.insert("AlocacaoSala", null, cv);
     }
 
     //UPDATE
     //Só vai ser chamado quando for feita a sincronia dos dados
-    public void atualizar(SemestreLetivo dados) {
-
+    public void atualizar(AlocacaoSala dados) {
+        ContentValues cv = new ContentValues();
+        cv.put("semestre", dados.getSemestre().getId());
+        cv.put("sala", dados.getSala().getId());
+        cv.put("oferta", dados.getOferta().getId());
+        db.update("AlocacaoSala", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
     }
 
     //DELETAR
@@ -137,17 +155,20 @@ public class AlocacaoSalaC {
 
     //CONSULTA POR ID
     public AlocacaoSala findById(int id) throws ParseException {
-        alocSala = new AlocacaoSala();
+        alocSala = null;
+
         cursor = db.query("AlocacaoSala", new String[]{"id", "semestre", "sala", "oferta"},
                 "id = " + id, null, null, null, null);
 
         cursor.moveToFirst();
-        alocSala.setId(cursor.getInt(0));
-        //preenche o objeto
-        alocSala.setSemestre(findSemLetivo.findById(cursor.getInt(1)));
-        alocSala.setSala(findSala.findById(cursor.getInt(2)));
-        alocSala.setOferta(findOferta.findById(cursor.getInt(3)));
-
+        if(cursor.getCount() > 0){
+            alocSala = new AlocacaoSala();
+            alocSala.setId(cursor.getInt(0));
+            //preenche o objeto
+            alocSala.setSemestre(findSemLetivo.findById(cursor.getInt(1)));
+            alocSala.setSala(findSala.findById(cursor.getInt(2)));
+            alocSala.setOferta(findOferta.findById(cursor.getInt(3)));
+        }
         cursor.close();
 
         //retorna o objeto

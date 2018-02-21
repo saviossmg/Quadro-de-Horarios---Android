@@ -39,17 +39,17 @@ public class OfertaC {
         while (!cursor.isAfterLast()) {
             oferta = new Oferta();
             oferta.setId(cursor.getInt(0));
-            oferta.setNomeTurma(cursor.getString(1));
-            oferta.setDiaSemana(cursor.getString(3));
+            oferta.setNometurma(cursor.getString(1));
+            oferta.setDiasemana(cursor.getString(3));
             oferta.setPeriodo(cursor.getInt(4));
             oferta.setDisciplina(cursor.getString(5));
-            oferta.setDescricaoPeriodoLetivo(cursor.getString(6));
-            oferta.setHoraInicialA(cursor.getString(7));
-            oferta.setHoraFinalA(cursor.getString(8));
-            oferta.setIntervaloInicio(cursor.getString(9));
-            oferta.setIntervaloFim(cursor.getString(10));
-            oferta.setHoraInicialB(cursor.getString(11));
-            oferta.setHoraFinalB(cursor.getString(12));
+            oferta.setDescricaoperiodoletivo(cursor.getString(6));
+            oferta.setHorainiciala(cursor.getString(7));
+            oferta.setHorafinala(cursor.getString(8));
+            oferta.setIntervaloinicio(cursor.getString(9));
+            oferta.setIntervalofim(cursor.getString(10));
+            oferta.setHorafinala(cursor.getString(11));
+            oferta.setHorafinalb(cursor.getString(12));
             oferta.setTurno(cursor.getString(13));
             oferta.setProfessor(cursor.getString(14));
             //preenche o objeto
@@ -66,20 +66,19 @@ public class OfertaC {
     public void inserir(Oferta dados) {
         ContentValues cv = new ContentValues();
         cv.put("id", dados.getId());
-        cv.put("nometurma", dados.getNomeTurma());
-        cv.put("curso", dados.getCurso().getId());
-        cv.put("diasemana", dados.getDiaSemana());
+        cv.put("nometurma", dados.getNometurma());
+        cv.put("curso", dados.getIdcurso());
+        cv.put("diasemana", dados.getDiasemana());
         cv.put("periodo", dados.getPeriodo());
         cv.put("disciplina", dados.getDisciplina());
         cv.put("disciplina", dados.getDisciplina());
-        cv.put("descricaoperiodoLetivo", dados.getDescricaoPeriodoLetivo());
-        cv.put("descricaoperiodoLetivo", dados.getDescricaoPeriodoLetivo());
-        cv.put("horainiciala", dados.getHoraInicialA());
-        cv.put("horafinala", dados.getHoraFinalA());
-        cv.put("intervaloinicio", dados.getIntervaloInicio());
-        cv.put("intervalofinal", dados.getIntervaloFim());
-        cv.put("horainicialb", dados.getHoraInicialB());
-        cv.put("horafinalb", dados.getHoraFinalB());
+        cv.put("descricaoperiodoLetivo", dados.getDescricaoperiodoletivo());
+        cv.put("horainiciala", dados.getHorainiciala());
+        cv.put("horafinala", dados.getHorafinala());
+        cv.put("intervaloinicio", dados.getIntervaloinicio());
+        cv.put("intervalofinal", dados.getIntervalofim());
+        cv.put("horainicialb", dados.getHorainicialb());
+        cv.put("horafinalb", dados.getHorafinalb());
         cv.put("turno", dados.getTurno());
         cv.put("professortitular", dados.getProfessor());
         db.insert("oferta", null, cv);
@@ -88,39 +87,56 @@ public class OfertaC {
     //UPDATE
     //Só vai ser chamado quando for feita a sincronia dos dados
     public void atualizar(Oferta dados) {
-
+        ContentValues cv = new ContentValues();
+        cv.put("nometurma", dados.getNometurma());
+        cv.put("curso", dados.getCurso().getId());
+        cv.put("diasemana", dados.getNometurma());
+        cv.put("periodo", dados.getPeriodo());
+        cv.put("disciplina", dados.getDisciplina());
+        cv.put("descricaoperiodoLetivo", dados.getDescricaoperiodoletivo());
+        cv.put("horainiciala", dados.getHorainiciala());
+        cv.put("horafinala", dados.getHorafinalb());
+        cv.put("intervaloinicio", dados.getIntervaloinicio());
+        cv.put("intervalofinal", dados.getIntervalofim());
+        cv.put("horainicialb", dados.getHorainicialb());
+        cv.put("horafinalb", dados.getHorafinalb());
+        cv.put("turno", dados.getTurno());
+        cv.put("professortitular", dados.getProfessor());
+        db.update("oferta", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
     }
 
     //DELETAR
     public void deletar(int id) {
         db.execSQL("DELETE FROM oferta WHERE  id =" + id);
-
     }
 
     //CONSULTA POR ID
     public Oferta findById(int id) {
-        oferta = new Oferta();
+        oferta = null;
         cursor = db.query("oferta", new String[]{"id", "nometurma", "curso", "diasemana", "periodo", "disciplina",
                 "descricaoperiodoLetivo", "horainiciala", "horafinala", "intervaloinicio", "intervalofinal", "horainicialb",
                 "horafinalb", "turno","professorTitular"}, "id = " + id, null, null, null, null);
 
         cursor.moveToFirst();
-        oferta.setId(cursor.getInt(0));
-        oferta.setNomeTurma(cursor.getString(1));
-        oferta.setDiaSemana(cursor.getString(3));
-        oferta.setPeriodo(cursor.getInt(4));
-        oferta.setDisciplina(cursor.getString(5));
-        oferta.setDescricaoPeriodoLetivo(cursor.getString(6));
-        oferta.setHoraInicialA(cursor.getString(7));
-        oferta.setHoraFinalA(cursor.getString(8));
-        oferta.setIntervaloInicio(cursor.getString(9));
-        oferta.setIntervaloFim(cursor.getString(10));
-        oferta.setHoraInicialB(cursor.getString(11));
-        oferta.setHoraFinalB(cursor.getString(12));
-        oferta.setTurno(cursor.getString(13));
-        oferta.setProfessor(cursor.getString(14));
-        //preenche o objeto
-        oferta.setCurso(findCurso.findById(cursor.getInt(2)));
+        if(cursor.getCount() > 0){
+            oferta = new Oferta();
+            oferta.setId(cursor.getInt(0));
+            oferta.setNometurma(cursor.getString(1));
+            oferta.setDiasemana(cursor.getString(3));
+            oferta.setPeriodo(cursor.getInt(4));
+            oferta.setDisciplina(cursor.getString(5));
+            oferta.setDescricaoperiodoletivo(cursor.getString(6));
+            oferta.setHorainiciala(cursor.getString(7));
+            oferta.setHorafinalb(cursor.getString(8));
+            oferta.setIntervaloinicio(cursor.getString(9));
+            oferta.setIntervalofim(cursor.getString(10));
+            oferta.setHorafinala(cursor.getString(11));
+            oferta.setHorafinalb(cursor.getString(12));
+            oferta.setTurno(cursor.getString(13));
+            oferta.setProfessor(cursor.getString(14));
+            //preenche o objeto
+            oferta.setCurso(findCurso.findById(cursor.getInt(2)));
+        }
 
         cursor.close();
 

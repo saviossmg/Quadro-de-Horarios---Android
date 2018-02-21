@@ -58,16 +58,20 @@ public class SemestreLetivoC {
     {
         ContentValues cv =new ContentValues();
         cv.put("id", dados.getId());
-        cv.put("semestre", dados.getSemestre().getId());
-        cv.put("curso", dados.getCurso().getId());
+        cv.put("semestre", dados.getIdsemestre());
+        cv.put("curso", dados.getIdcurso());
         db.insert("semestreletivo", null, cv);
+        System.out.println("Inseriu Semestre Letivo!");
     }
 
     //UPDATE
     //Só vai ser chamado quando for feita a sincronia dos dados
-    public void atualizar(Predio dados)
-    {
-
+    public void atualizar(SemestreLetivo dados){
+        ContentValues cv =new ContentValues();
+        cv.put("semestre", dados.getIdsemestre());
+        cv.put("curso", dados.getIdcurso());
+        db.update("semestreletivo", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
+        System.out.println("Atualizou Semestre Letivo!");
     }
 
     //DELETAR
@@ -78,16 +82,17 @@ public class SemestreLetivoC {
 
     //CONSULTA POR ID
     public SemestreLetivo findById(int id) throws ParseException {
-        semLetivo = new SemestreLetivo();
+        semLetivo = null;
         cursor = db.query("semestreletivo", new String[]{"id","semestre", "curso"},"id = "+id,
                 null, null, null, null);
-
         cursor.moveToFirst();
-        semLetivo.setId(cursor.getInt(0));
-        semLetivo.setSemestre(findSemestre.findById(cursor.getInt(1)));
-        semLetivo.setCurso(findCurso.findById(cursor.getInt(2)));
+        if(cursor.getCount() > 0){
+            semLetivo = new SemestreLetivo();
+            semLetivo.setId(cursor.getInt(0));
+            semLetivo.setSemestre(findSemestre.findById(cursor.getInt(1)));
+            semLetivo.setCurso(findCurso.findById(cursor.getInt(2)));
+        }
         cursor.close();
-
         //retorna o objeto
         return semLetivo;
     }

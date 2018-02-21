@@ -12,6 +12,7 @@ public class Sala {
     private Predio predio;
     private String tipo;
     private Boolean ativo;
+    private int idpredio;
 
     public Sala() {
         this.id = id;
@@ -20,6 +21,7 @@ public class Sala {
         this.predio = new Predio();
         this.tipo = tipo;
         this.ativo = ativo;
+        this.idpredio = idpredio;
     }
 
     public int getId() {
@@ -68,6 +70,14 @@ public class Sala {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public int getIdpredio() {
+        return idpredio;
+    }
+
+    public void setIdpredio(int idpredio) {
+        this.idpredio = idpredio;
     }
 
     public String toString(){

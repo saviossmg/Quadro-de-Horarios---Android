@@ -134,7 +134,6 @@ public class Principal extends AppCompatActivity {
     public void onActivityResult(int codigo, int resultado, Intent dados) {
         try {
             if(resultado == Activity.RESULT_OK){
-                System.out.println("preferencias: "+Preferencias.getBoolean(this, "salvo"));
                 String mensagem;
                 Boolean voltar = dados.getExtras().getBoolean("voltar");
                 String tela = dados.getExtras().getString("tela");
@@ -150,24 +149,24 @@ public class Principal extends AppCompatActivity {
                         int semestre = dados.getExtras().getInt("semestre");
                         int periodo = dados.getExtras().getInt("periodo");
                         int sala = dados.getExtras().getInt("sala");
-                        String turno = dados.getExtras().getString("turno");
-                        String dia = dados.getExtras().getString("dia");
+                        int turno = dados.getExtras().getInt("turno");
+                        int dia = dados.getExtras().getInt("dia");
 
                         //verifica se passou os parametros padrão
-                        if(curso == 0 && semestre == 0 && periodo == -1 && sala == 0 && turno.equals("TURNO") && dia.equals("DIA")){
+                        if(curso == 0 && semestre == 0 && periodo == -1 && sala == 0 && turno == 0 && dia == 0){
                             mensagem = "Lista inalterada: Parametros vazios passados.";
                         }
                         else{
                             //altera as preferencias
-                            if(curso != 0){
-                                Preferencias.setInt(this,"curso",curso);
-                                Preferencias.setBoolean(this, "salvo",true);
-                            }
-
-                            if(semestre != 0){
-                                Preferencias.setInt(this,"semestre",semestre);
-                                Preferencias.setBoolean(this, "salvo",true);
-                            }
+//                            if(curso != 0){
+//                                Preferencias.setInt(this,"curso",curso);
+//                                Preferencias.setBoolean(this, "salvo",true);
+//                            }
+//
+//                            if(semestre != 0){
+//                                Preferencias.setInt(this,"semestre",semestre);
+//                                Preferencias.setBoolean(this, "salvo",true);
+//                            }
                             mensagem = "Lista alterada de acordo com os filtros selecionados.";
                             //recarrega o conteudo da fragment
                             FragmentConsultas fragment = (FragmentConsultas) vpAdapter.getItem(2);

@@ -56,16 +56,22 @@ public class CursoC {
         ContentValues cv =new ContentValues();
         cv.put("id", dados.getId());
         cv.put("nome", dados.getNome());
-        cv.put("unidade", dados.getUnidade().getId());
+        cv.put("unidade", dados.getIdunidade());
         cv.put("codcurso", dados.getCodCurso());
         db.insert("curso", null, cv);
+        System.out.println("Inseriu Curso!");
     }
 
     //UPDATE
     //Só vai ser chamado quando for feita a sincronia dos dados
     public void atualizar(Curso dados)
     {
-
+        ContentValues cv =new ContentValues();
+        cv.put("nome", dados.getNome());
+        cv.put("unidade", dados.getIdunidade());
+        cv.put("codcurso", dados.getCodCurso());
+        db.update("curso", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
+        System.out.println("Atualizou Curso!");
     }
 
     //DELETAR
@@ -77,18 +83,18 @@ public class CursoC {
     //CONSULTA POR ID
     public Curso findById(int id)
     {
-        curso = new Curso();
+        curso = null;
         cursor = db.query("curso", new String[]{"id","nome", "unidade", "codcurso"},"id = "+id,
                 null, null, null, null);
-
         cursor.moveToFirst();
-        curso.setId(cursor.getInt(0));
-        curso.setNome(cursor.getString(1));
-        curso.setUnidade(findUnidade.findById(cursor.getInt(2)));
-        curso.setCodCurso(cursor.getString(3));
-
+        if(cursor.getCount() > 0){
+            curso = new Curso();
+            curso.setId(cursor.getInt(0));
+            curso.setNome(cursor.getString(1));
+            curso.setUnidade(findUnidade.findById(cursor.getInt(2)));
+            curso.setCodCurso(cursor.getString(3));
+        }
         cursor.close();
-
         //retorna o objeto
         return curso;
     }

@@ -4,25 +4,36 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.unitins.quadro.quadrodehorarios.R;
+import com.unitins.quadro.quadrodehorarios.controllers.AlocacaoSalaC;
+import com.unitins.quadro.quadrodehorarios.controllers.CriptografiaC;
 import com.unitins.quadro.quadrodehorarios.controllers.CursoC;
 import com.unitins.quadro.quadrodehorarios.controllers.SalaC;
 import com.unitins.quadro.quadrodehorarios.controllers.SemestreC;
+import com.unitins.quadro.quadrodehorarios.models.AlocacaoSala;
+import com.unitins.quadro.quadrodehorarios.models.Criptografia;
 import com.unitins.quadro.quadrodehorarios.models.Curso;
 import com.unitins.quadro.quadrodehorarios.models.Periodo;
 import com.unitins.quadro.quadrodehorarios.models.Sala;
 import com.unitins.quadro.quadrodehorarios.models.Semestre;
+import com.unitins.quadro.quadrodehorarios.models.Unidade;
+import com.unitins.quadro.quadrodehorarios.services.ConexaoTestador;
+import com.unitins.quadro.quadrodehorarios.services.asynctask.DadosD;
+import com.unitins.quadro.quadrodehorarios.services.asynctask.OfertaD;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class HorarioPesquisa extends AppCompatActivity {
+public class HorarioPesquisa extends AppCompatActivity implements View.OnClickListener {
 
     //referencias visuais
     private Spinner cursoCombo = null;
@@ -31,6 +42,7 @@ public class HorarioPesquisa extends AppCompatActivity {
     private Spinner salaCombo = null;
     private Spinner turnoCombo = null;
     private Spinner diaCombo = null;
+    private Button okBtn = null;
 
     //adapters dos spinners
     private ArrayAdapter<Curso> cursoAdapter;
@@ -54,7 +66,14 @@ public class HorarioPesquisa extends AppCompatActivity {
     private ArrayList<Periodo> periodos;
     private ArrayList<Sala> salas;
     private ArrayList<String> turnos;
+    private ArrayList<Integer> turnosId;
     private ArrayList<String> diasSemana;
+    private ArrayList<Integer> diasId;
+
+    //testador de conexao
+    private ConexaoTestador conecta;
+    private OfertaD baixaDados =  null;
+    private AlocacaoSalaC alocacaoc = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +88,10 @@ public class HorarioPesquisa extends AppCompatActivity {
         salaCombo = (Spinner) findViewById(R.id.pesquisar_sala);
         turnoCombo = (Spinner) findViewById(R.id.pesquisar_turno);
         diaCombo = (Spinner) findViewById(R.id.pesquisar_dia);
+        okBtn = (Button) findViewById(R.id.pesquisar_btnok);
+
+        conecta = new ConexaoTestador();
+        alocacaoc = new AlocacaoSalaC(this);
 
         //carrega dados dos arraylists
         try {
@@ -145,6 +168,8 @@ public class HorarioPesquisa extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {}
         });
 
+        //
+        okBtn.setOnClickListener(this);
     }
 
     //sobrescreve o botão de voltar da barra
@@ -156,7 +181,6 @@ public class HorarioPesquisa extends AppCompatActivity {
                 Bundle dicionario = new Bundle();
                 dicionario.putBoolean("voltar", true);
                 dicionario.putString("tela", "PesquisarHorarios");
-
                 Intent resultado = new Intent();
                 //Dicionario de dados
                 resultado.putExtras(dicionario);
@@ -171,8 +195,55 @@ public class HorarioPesquisa extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        //eventos de click
+        try{
+            switch (v.getId()) {
+                case R.id.pesquisar_btnok:
+                    clickOk();
+                    break;
+            }
+        } catch (Exception e){
+            Toast.makeText(this.getApplicationContext(), "Atenção: "+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     //metodo click
-    public void clickOk(View Botao) {
+    public void clickOk() throws ParseException {
+        //obriga pelo menos a selecionar o semestre
+        if(semestreAdapter.getItem(semestrePos).getId() != 0){
+            //verifica se tem alguim dado no banco
+            ArrayList<AlocacaoSala> vrAloc = alocacaoc.listar(true,cursoAdapter.getItem(cursoPos).getId(),semestreAdapter.getItem(semestrePos).getId(),
+                    periodoAdapter.getItem(periodoPos).getNum(),salaAdapter.getItem(salaPos).getId(),turnosId.get(turnoPos),
+                    diasId.get(diaPos),false);
+
+            if(vrAloc.isEmpty()){
+                //chama a async task se retornar vazio
+                if (conecta.testaRede(this.getApplication())){
+                    //cria uma nova asynctask,.
+                    baixaDados = new OfertaD(this,semestreAdapter.getItem(semestrePos).getId(),cursoAdapter.getItem(cursoPos).getId(),
+                            periodoAdapter.getItem(periodoPos).getNum(), salaAdapter.getItem(salaPos).getId(),turnosId.get(turnoPos), diasId.get(diaPos));
+                    //chama o asynctask com a URL
+                    baixaDados.execute();
+                } else {
+                    //se não houver conexão, ele retorna um toast e nao carrega a lista
+                    Toast.makeText(this.getApplicationContext(), "Sem conexão com a internet!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                finalizarIntent();
+            }
+        }
+        else{
+            Toast.makeText(this.getApplicationContext(), "Selecione o semestre!", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    //finaliza a intent
+    public void finalizarIntent(){
         //Dicionario de dados
         Bundle dicionario = new Bundle();
         dicionario.putBoolean("voltar", false);
@@ -182,9 +253,8 @@ public class HorarioPesquisa extends AppCompatActivity {
         dicionario.putInt("semestre", semestreAdapter.getItem(semestrePos).getId());
         dicionario.putInt("periodo", periodoAdapter.getItem(periodoPos).getNum());
         dicionario.putInt("sala", salaAdapter.getItem(salaPos).getId());
-        dicionario.putString("turno", turnoAdapter.getItem(turnoPos).toString());
-        dicionario.putString("dia", diaAdapter.getItem(diaPos).toString());
-
+        dicionario.putInt("turno", turnosId.get(turnoPos));
+        dicionario.putInt("dia", diasId.get(diaPos));
         Intent resultado = new Intent();
         //Dicionario de dados
         resultado.putExtras(dicionario);
@@ -242,7 +312,7 @@ public class HorarioPesquisa extends AppCompatActivity {
         this.periodos.add(aux);
 
         aux = new Periodo();
-        aux.setDescricao("Especial");
+        aux.setDescricao("Regulizaração/Especial");
         aux.setNum(0);
         this.periodos.add(aux);
 
@@ -275,21 +345,34 @@ public class HorarioPesquisa extends AppCompatActivity {
 
     private void loadTurnos(){
         this.turnos = new ArrayList<String>();
+        this.turnosId = new ArrayList<Integer>();
         this.turnos.add("TURNO");
+        this.turnosId.add(0);
         this.turnos.add("Matutino");
+        this.turnosId.add(9);
         this.turnos.add("Vespertino");
+        this.turnosId.add(10);
         this.turnos.add("Noturno");
+        this.turnosId.add(11);
     }
 
     private void loadDiassemana(){
         this.diasSemana = new ArrayList<String>();
+        this.diasId = new ArrayList<Integer>();
         this.diasSemana.add("DIA");
+        this.diasId.add(0);
         this.diasSemana.add("Segunda-Feira");
+        this.diasId.add(13);
         this.diasSemana.add("Terça-Feira");
+        this.diasId.add(14);
         this.diasSemana.add("Quarta-Feira");
+        this.diasId.add(15);
         this.diasSemana.add("Quinta-Feira");
+        this.diasId.add(16);
         this.diasSemana.add("Sexta-Feira");
+        this.diasId.add(17);
         this.diasSemana.add("Sábado");
+        this.diasId.add(18);
     }
 
     //metodos que criam os adapters

@@ -10,12 +10,14 @@ public class Curso {
     private String nome;
     private Unidade unidade;
     private String codCurso;
+    private int idunidade;
 
     public Curso() {
         this.id = id;
         this.nome = nome;
         this.unidade = unidade;
         this.codCurso = codCurso;
+        this.idunidade = idunidade;
     }
 
     public int getId() {
@@ -48,6 +50,14 @@ public class Curso {
 
     public void setCodCurso(String codCurso) {
         this.codCurso = codCurso;
+    }
+
+    public int getIdunidade() {
+        return idunidade;
+    }
+
+    public void setIdunidade(int idunidade) {
+        this.idunidade = idunidade;
     }
 
     public String toString(){

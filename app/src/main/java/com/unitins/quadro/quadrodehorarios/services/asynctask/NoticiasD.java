@@ -133,7 +133,6 @@ public class NoticiasD extends AsyncTask<String, Void, ArrayList<Noticia>> {
         }
     }
 
-
     //Thread finalizada (codigo executado na Thread principal (interface))
     public void onPostExecute(ArrayList<Noticia> noticias) {
         //desgaz a barra de progresso

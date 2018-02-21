@@ -115,10 +115,8 @@ public class FragmentNews extends Fragment {
     private void carregaWeb(){
         if (conecta.testaRede(this.getActivity())){
             //so marca como carregado caso haja conexão
-            AsyncTask<String, Void, ArrayList<Noticia>> ret;
             //cria uma nova asynctask
             baixaNoticias = new NoticiasD(this, lista,noticias);
-            //baixaNoticias.cancel(true);
             //chama o asynctask com a URL
             baixaNoticias.execute("https://www.unitins.br/webapi/api/noticia/?offset="+ofset);
         } else {

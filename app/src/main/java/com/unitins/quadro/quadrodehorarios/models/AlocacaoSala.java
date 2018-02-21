@@ -10,12 +10,18 @@ public class AlocacaoSala {
     private SemestreLetivo semestre;
     private Sala sala;
     private Oferta oferta;
+    private int idsala;
+    private int idoferta;
+    private int idsemestre;
 
     public AlocacaoSala() {
         this.id = id;
         this.semestre = semestre;
         this.sala = sala;
         this.oferta = oferta;
+        this.idsala = idsala;
+        this.idoferta = idoferta;
+        this.idsemestre = idsemestre;
     }
 
     public int getId() {
@@ -50,9 +56,28 @@ public class AlocacaoSala {
         this.oferta = oferta;
     }
 
-    //metodo sobrescrito
-    public String toString(){
-        String ret = getOferta().getDisciplina()+"\n\t\t"+getSala().getNome();
-        return ret;
+    public int getIdsala() {
+        return idsala;
     }
+
+    public void setIdsala(int idsala) {
+        this.idsala = idsala;
+    }
+
+    public int getIdoferta() {
+        return idoferta;
+    }
+
+    public void setIdoferta(int idoferta) {
+        this.idoferta = idoferta;
+    }
+
+    public int getIdsemestre() {
+        return idsemestre;
+    }
+
+    public void setIdsemestre(int idsemestre) {
+        this.idsemestre = idsemestre;
+    }
+
 }

@@ -41,7 +41,7 @@ public class HorariosA extends ArrayAdapter<AlocacaoSala>{
         TextView disciplina = (TextView)celulaReciclado.findViewById(R.id.celhorario_disciplina);
 
         //seta os dados
-        dia.setText(c.getOferta().getDiaSemana());
+        dia.setText(c.getOferta().getDiasemana());
         local.setText(c.getSala().getNome());
         disciplina.setText(c.getOferta().getDisciplina());
 

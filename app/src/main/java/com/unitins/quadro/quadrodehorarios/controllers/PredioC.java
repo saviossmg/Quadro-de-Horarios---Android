@@ -59,7 +59,7 @@ public class PredioC {
         cv.put("id", dados.getId());
         cv.put("nome", dados.getNome());
         cv.put("pisos", dados.getPisos());
-        cv.put("unidade", dados.getUnidade().getId());
+        cv.put("unidade", dados.getIdunidade());
         cv.put("ativo", dados.getAtivo());
         db.insert("predio", null, cv);
     }
@@ -68,29 +68,36 @@ public class PredioC {
     //Só vai ser chamado quando for feita a sincronia dos dados
     public void atualizar(Predio dados)
     {
-
+        ContentValues cv =new ContentValues();
+        cv.put("nome", dados.getNome());
+        cv.put("pisos", dados.getPisos());
+        cv.put("unidade", dados.getIdunidade());
+        cv.put("ativo", dados.getAtivo());
+        db.update("predio", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
     }
 
     //DELETAR
     public void deletar(int id){
         db.execSQL("DELETE FROM predio WHERE  id ="+id);
-
     }
 
     //CONSULTA POR ID
     public Predio findById(int id)
     {
-        predio = new Predio();
+        predio = null;
         cursor = db.query("predio", new String[]{"id","nome", "pisos","unidade", "ativo"},"id = "+id,
                 null, null, null, null);
 
         cursor.moveToFirst();
-        predio.setId(cursor.getInt(0));
-        predio.setNome(cursor.getString(1));
-        predio.setPisos(cursor.getInt(2));
-        predio.setUnidade(findUnidade.findById(cursor.getInt(3)));
-        predio.setAtivo(Boolean.parseBoolean(cursor.getString(4)));
-
+        //caso nao encontre nada retornará nulo
+        if(cursor.getCount() > 0){
+            predio = new Predio();
+            predio.setId(cursor.getInt(0));
+            predio.setNome(cursor.getString(1));
+            predio.setPisos(cursor.getInt(2));
+            predio.setUnidade(findUnidade.findById(cursor.getInt(3)));
+            predio.setAtivo(Boolean.parseBoolean(cursor.getString(4)));
+        }
         cursor.close();
 
         //retorna o objeto

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.unitins.quadro.quadrodehorarios.models.Predio;
 import com.unitins.quadro.quadrodehorarios.models.Sala;
 import com.unitins.quadro.quadrodehorarios.services.DatabaseHelper;
 
@@ -60,17 +59,25 @@ public class SalaC {
         cv.put("id", dados.getId());
         cv.put("nome", dados.getNome());
         cv.put("piso", dados.getPiso());
-        cv.put("predio", dados.getPredio().getId());
+        cv.put("predio", dados.getIdpredio());
         cv.put("tipo", dados.getTipo());
         cv.put("ativo", dados.getAtivo());
         db.insert("sala", null, cv);
+        System.out.println("Inseriu Sala!");
     }
 
     //UPDATE
     //Só vai ser chamado quando for feita a sincronia dos dados
-    public void atualizar(Predio dados)
+    public void atualizar(Sala dados)
     {
-
+        ContentValues cv =new ContentValues();
+        cv.put("nome", dados.getNome());
+        cv.put("piso", dados.getPiso());
+        cv.put("predio", dados.getIdpredio());
+        cv.put("tipo", dados.getTipo());
+        cv.put("ativo", dados.getAtivo());
+        db.update("sala", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
+        System.out.println("Atualizou Sala!");
     }
 
     //DELETAR
@@ -82,17 +89,20 @@ public class SalaC {
     //CONSULTA POR ID
     public Sala findById(int id)
     {
-        sala = new Sala();
+        sala = null;
         cursor = db.query("sala", new String[]{"id","nome","piso", "predio", "tipo", "ativo"},"id = "+id,
                 null, null, null, null);
 
         cursor.moveToFirst();
-        sala.setId(cursor.getInt(0));
-        sala.setNome(cursor.getString(1));
-        sala.setPiso(cursor.getInt(2));
-        sala.setPredio(findPredio.findById(cursor.getInt(3)));
-        sala.setTipo(cursor.getString(4));
-        sala.setAtivo(Boolean.parseBoolean(cursor.getString(5)));
+        if(cursor.getCount() > 0 ){
+            sala = new Sala();
+            sala.setId(cursor.getInt(0));
+            sala.setNome(cursor.getString(1));
+            sala.setPiso(cursor.getInt(2));
+            sala.setPredio(findPredio.findById(cursor.getInt(3)));
+            sala.setTipo(cursor.getString(4));
+            sala.setAtivo(Boolean.parseBoolean(cursor.getString(5)));
+        }
 
         cursor.close();
 

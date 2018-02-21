@@ -11,6 +11,7 @@ public class Predio {
     private int pisos;
     private Unidade unidade;
     private Boolean ativo;
+    private int idunidade;
 
     public Predio() {
         this.id = id;
@@ -18,6 +19,7 @@ public class Predio {
         this.pisos = pisos;
         this.unidade = unidade;
         this.ativo = ativo;
+        this.idunidade = idunidade;
     }
 
     public int getId() {
@@ -58,5 +60,13 @@ public class Predio {
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public int getIdunidade() {
+        return idunidade;
+    }
+
+    public void setIdunidade(int idunidade) {
+        this.idunidade = idunidade;
     }
 }

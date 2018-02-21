@@ -34,16 +34,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
     /* O primeiro argumento é o contexto da aplicacao
      * O segundo argumento é o nome do banco de dados
-     * O terceiro é um pondeiro para manipulação de dados,
-     *   não precisaremos dele.
+     * O terceiro é um pondeiro para manipulação de dados, não precisaremos dele.
      * O quarto é a versão do banco de dados
      */
-        super(context, "AlocacaoBD.db", null, 1);
+        super(context, "AlocacaoBD.db", null, 2);
         this.context = context;
     }
 
     /**
-     * Os métodos onCreate e onUpgrade precisam ser sobreescrito
+     * Os métodos onCreate e onUpgrade precisam ser sobreescritos
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -62,10 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     }
 
-    /**
-     * Método auxiliar que verifica a existencia do banco
-     * da aplicação.
-     */
+    // Método auxiliar que verifica a existencia do banco da aplicação.
     private boolean checkDataBase() {
         SQLiteDatabase db = null;
         try {
@@ -81,6 +77,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db != null;
     }
 
+    //Método auxiliar que cria o banco da aplicação.
     private void createDataBase() throws Exception {
         // Primeiro temos que verificar se o banco da aplicação
         // já foi criado
@@ -102,10 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Esse método é responsavel por copiar o banco do diretório
-     * assets para o diretório padrão do android.
-     */
+    //Esse método é responsavel por copiar o banco do diretório assets para o diretório padrão.
     private void copyDatabase() throws IOException {
 
         String dbPath = DBPATH + DBNAME;
@@ -126,6 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         dbStream.close();
     }
 
+    //Método de acesso externo para o DatabaseHelper
     public SQLiteDatabase getDatabase() {
         try {
             // Verificando se o banco já foi criado e se não foi o

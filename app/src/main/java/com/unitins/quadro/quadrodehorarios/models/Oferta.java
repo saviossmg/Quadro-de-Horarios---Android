@@ -7,37 +7,25 @@ package com.unitins.quadro.quadrodehorarios.models;
 public class Oferta {
 
     private int id;
-    private String nomeTurma;
+    private String nometurma;
     private Curso curso;
-    private String diaSemana;
+    private String diasemana;
     private int periodo;
     private String disciplina;
-    private String descricaoPeriodoLetivo;
-    private String horaInicialA;
-    private String horaFinalA;
-    private String intervaloInicio;
-    private String intervaloFim;
-    private String horaInicialB;
-    private String horaFinalB;
+    private String descricaoperiodoletivo;
+    private String horainiciala;
+    private String horafinala;
+    private String intervaloinicio;
+    private String intervalofim;
+    private String horainicialb;
+    private String horafinalb;
     private String professor;
     private String turno;
+    private int tipohorario;
+    private int idcurso;
 
     public Oferta() {
-        this.id = id;
-        this.nomeTurma = nomeTurma;
-        this.curso = curso;
-        this.diaSemana = diaSemana;
-        this.periodo = periodo;
-        this.disciplina = disciplina;
-        this.descricaoPeriodoLetivo = descricaoPeriodoLetivo;
-        this.horaInicialA = horaInicialA;
-        this.horaFinalA = horaFinalA;
-        this.intervaloInicio = intervaloInicio;
-        this.intervaloFim = intervaloFim;
-        this.horaInicialB = horaInicialB;
-        this.horaFinalB = horaFinalB;
-        this.professor = professor;
-        this.turno = turno;
+
     }
 
     public int getId() {
@@ -48,12 +36,12 @@ public class Oferta {
         this.id = id;
     }
 
-    public String getNomeTurma() {
-        return nomeTurma;
+    public String getNometurma() {
+        return nometurma;
     }
 
-    public void setNomeTurma(String nomeTurma) {
-        this.nomeTurma = nomeTurma;
+    public void setNometurma(String nometurma) {
+        this.nometurma = nometurma;
     }
 
     public Curso getCurso() {
@@ -64,12 +52,12 @@ public class Oferta {
         this.curso = curso;
     }
 
-    public String getDiaSemana() {
-        return diaSemana;
+    public String getDiasemana() {
+        return diasemana;
     }
 
-    public void setDiaSemana(String diaSemana) {
-        this.diaSemana = diaSemana;
+    public void setDiasemana(String diasemana) {
+        this.diasemana = diasemana;
     }
 
     public int getPeriodo() {
@@ -88,60 +76,60 @@ public class Oferta {
         this.disciplina = disciplina;
     }
 
-    public String getDescricaoPeriodoLetivo() {
-        return descricaoPeriodoLetivo;
+    public String getDescricaoperiodoletivo() {
+        return descricaoperiodoletivo;
     }
 
-    public void setDescricaoPeriodoLetivo(String descricaoPeriodoLetivo) {
-        this.descricaoPeriodoLetivo = descricaoPeriodoLetivo;
+    public void setDescricaoperiodoletivo(String descricaoperiodoletivo) {
+        this.descricaoperiodoletivo = descricaoperiodoletivo;
     }
 
-    public String getHoraInicialA() {
-        return horaInicialA;
+    public String getHorainiciala() {
+        return horainiciala;
     }
 
-    public void setHoraInicialA(String horaInicialA) {
-        this.horaInicialA = horaInicialA;
+    public void setHorainiciala(String horainiciala) {
+        this.horainiciala = horainiciala;
     }
 
-    public String getHoraFinalA() {
-        return horaFinalA;
+    public String getHorafinala() {
+        return horafinala;
     }
 
-    public void setHoraFinalA(String horaFinalA) {
-        this.horaFinalA = horaFinalA;
+    public void setHorafinala(String horafinala) {
+        this.horafinala = horafinala;
     }
 
-    public String getIntervaloInicio() {
-        return intervaloInicio;
+    public String getIntervaloinicio() {
+        return intervaloinicio;
     }
 
-    public void setIntervaloInicio(String intervaloInicio) {
-        this.intervaloInicio = intervaloInicio;
+    public void setIntervaloinicio(String intervaloinicio) {
+        this.intervaloinicio = intervaloinicio;
     }
 
-    public String getIntervaloFim() {
-        return intervaloFim;
+    public String getIntervalofim() {
+        return intervalofim;
     }
 
-    public void setIntervaloFim(String intervaloFim) {
-        this.intervaloFim = intervaloFim;
+    public void setIntervalofim(String intervalofim) {
+        this.intervalofim = intervalofim;
     }
 
-    public String getHoraInicialB() {
-        return horaInicialB;
+    public String getHorainicialb() {
+        return horainicialb;
     }
 
-    public void setHoraInicialB(String horaInicialB) {
-        this.horaInicialB = horaInicialB;
+    public void setHorainicialb(String horainicialb) {
+        this.horainicialb = horainicialb;
     }
 
-    public String getHoraFinalB() {
-        return horaFinalB;
+    public String getHorafinalb() {
+        return horafinalb;
     }
 
-    public void setHoraFinalB(String horaFinalB) {
-        this.horaFinalB = horaFinalB;
+    public void setHorafinalb(String horafinalb) {
+        this.horafinalb = horafinalb;
     }
 
     public String getProfessor() {
@@ -158,5 +146,21 @@ public class Oferta {
 
     public void setTurno(String turno) {
         this.turno = turno;
+    }
+
+    public int getTipohorario() {
+        return tipohorario;
+    }
+
+    public void setTipohorario(int tipohorario) {
+        this.tipohorario = tipohorario;
+    }
+
+    public int getIdcurso() {
+        return idcurso;
+    }
+
+    public void setIdcurso(int idcurso) {
+        this.idcurso = idcurso;
     }
 }
