@@ -53,6 +53,7 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
     private FloatingActionButton pesquisar;
     private FloatingActionButton recarregar;
     private FloatingActionButton sincronizar;
+    private FloatingActionButton mostrar;
 
     //banco e id
     private static AlocacaoSalaC findAlocacao;
@@ -70,6 +71,7 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
     //variaveis de controle
     private boolean carregou;
     private boolean onShow;
+    private boolean clickShow;
 
     private String mensagem;
 
@@ -87,6 +89,7 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
         pesquisar = (FloatingActionButton) view.findViewById(R.id.consulta_btnpesquisar);
         recarregar = (FloatingActionButton) view.findViewById(R.id.consulta_btnrecarregar);
         sincronizar = (FloatingActionButton) view.findViewById(R.id.consulta_btnsincronizar);
+        mostrar = (FloatingActionButton) view.findViewById(R.id.consulta_btnshow);
 
         conecta = new ConexaoTestador();
 
@@ -109,6 +112,12 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
         pesquisar.setOnClickListener(this);
         recarregar.setOnClickListener(this);
         sincronizar.setOnClickListener(this);
+        mostrar.setOnClickListener(this);
+
+        pesquisar.hide();
+        recarregar.hide();
+        sincronizar.hide();
+        clickShow = false;
 
         carregou = false;
         onShow = false;
@@ -134,6 +143,26 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
             case R.id.consulta_btnsincronizar:
                 this.refresh = true;
                 carregaWeb();
+                listaCarregar();
+                mudarLista();
+                break;
+            case R.id.consulta_btnshow:
+                if(clickShow){
+                    pesquisar.hide();
+                    recarregar.hide();
+                    sincronizar.hide();
+                    mostrar.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimary));
+                    mostrar.setImageResource(R.drawable.plus);
+                    clickShow = false;
+                }
+                else{
+                    pesquisar.show();
+                    recarregar.show();
+                    sincronizar.show();
+                    mostrar.setBackgroundTintList(getResources().getColorStateList(R.color.rosa));
+                    mostrar.setImageResource(R.drawable.minus);
+                    clickShow = true;
+                }
                 break;
         }
     }
@@ -152,8 +181,6 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
             else{
                 mensagem = "Lista de Alocações vazias.";
             }
-
-
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Erro em Lista: " + e, Toast.LENGTH_SHORT).show();
         }
@@ -209,12 +236,13 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
             dicionario.putString("horario2",alocacoes.get(pos).getOferta().getHorainicialb()+" às "+alocacoes.get(pos).getOferta().getHorafinalb());
 
         dicionario.putString("professor",alocacoes.get(pos).getOferta().getProfessor());
-        dicionario.putString("local",alocacoes.get(pos).getSala().getNome()+", "+alocacoes.get(pos).getSala().getPredio().getNome());
+        dicionario.putString("local",alocacoes.get(pos).getSala().getNome()+", "+alocacoes.get(pos).getSala().getPredio().getNome()+" - "+alocacoes.get(pos).getSala().getPredio().getUnidade().getNome());
 
         //cria uma intenção e solicita a troca de telas
         Intent solicitacao = new Intent(getActivity(), HorarioDetalhes.class);
         //coloca os dados na intent
         solicitacao.putExtras(dicionario);
+
         //Dicionario de dados
         startActivityForResult(solicitacao, 1);
     }
@@ -235,6 +263,14 @@ public class FragmentConsultas extends Fragment implements View.OnClickListener 
             }
         }
         if(!isVisibleToUser ){
+            if(mostrar != null){
+                pesquisar.hide();
+                recarregar.hide();
+                sincronizar.hide();
+                mostrar.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimary));
+                mostrar.setImageResource(R.drawable.plus);
+            }
+            clickShow = false;
             onShow = false;
         }
     }

@@ -48,7 +48,7 @@ public class OfertaC {
             oferta.setHorafinala(cursor.getString(8));
             oferta.setIntervaloinicio(cursor.getString(9));
             oferta.setIntervalofim(cursor.getString(10));
-            oferta.setHorafinala(cursor.getString(11));
+            oferta.setHorainicialb(cursor.getString(11));
             oferta.setHorafinalb(cursor.getString(12));
             oferta.setTurno(cursor.getString(13));
             oferta.setProfessor(cursor.getString(14));
@@ -89,13 +89,13 @@ public class OfertaC {
     public void atualizar(Oferta dados) {
         ContentValues cv = new ContentValues();
         cv.put("nometurma", dados.getNometurma());
-        cv.put("curso", dados.getCurso().getId());
-        cv.put("diasemana", dados.getNometurma());
+        cv.put("curso", dados.getIdcurso());
+        cv.put("diasemana", dados.getDiasemana());
         cv.put("periodo", dados.getPeriodo());
         cv.put("disciplina", dados.getDisciplina());
         cv.put("descricaoperiodoLetivo", dados.getDescricaoperiodoletivo());
         cv.put("horainiciala", dados.getHorainiciala());
-        cv.put("horafinala", dados.getHorafinalb());
+        cv.put("horafinala", dados.getHorafinala());
         cv.put("intervaloinicio", dados.getIntervaloinicio());
         cv.put("intervalofinal", dados.getIntervalofim());
         cv.put("horainicialb", dados.getHorainicialb());
@@ -127,10 +127,10 @@ public class OfertaC {
             oferta.setDisciplina(cursor.getString(5));
             oferta.setDescricaoperiodoletivo(cursor.getString(6));
             oferta.setHorainiciala(cursor.getString(7));
-            oferta.setHorafinalb(cursor.getString(8));
+            oferta.setHorafinala(cursor.getString(8));
             oferta.setIntervaloinicio(cursor.getString(9));
             oferta.setIntervalofim(cursor.getString(10));
-            oferta.setHorafinala(cursor.getString(11));
+            oferta.setHorainicialb(cursor.getString(11));
             oferta.setHorafinalb(cursor.getString(12));
             oferta.setTurno(cursor.getString(13));
             oferta.setProfessor(cursor.getString(14));

@@ -38,11 +38,16 @@ public class HorariosA extends ArrayAdapter<AlocacaoSala>{
         //pegar os dados do objeto e setar os elementos visuais da celula
         TextView dia = (TextView)celulaReciclado.findViewById(R.id.celhorario_dia);
         TextView local = (TextView)celulaReciclado.findViewById(R.id.celhorario_local);
+        TextView curso = (TextView)celulaReciclado.findViewById(R.id.celhorario_curso);
         TextView disciplina = (TextView)celulaReciclado.findViewById(R.id.celhorario_disciplina);
 
         //seta os dados
         dia.setText(c.getOferta().getDiasemana());
-        local.setText(c.getSala().getNome());
+        local.setText(c.getSala().getNome()+" - "+c.getSala().getPredio().getNome());
+        String per = c.getOferta().getPeriodo()+"º Período";
+        if(c.getOferta().getPeriodo() == 0)
+            per = "Regularização";
+        curso.setText(c.getOferta().getCurso().getNome()+" - "+per);
         disciplina.setText(c.getOferta().getDisciplina());
 
         return celulaReciclado;

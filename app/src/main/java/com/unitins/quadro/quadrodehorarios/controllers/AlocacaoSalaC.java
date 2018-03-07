@@ -54,7 +54,6 @@ public class AlocacaoSalaC {
             //preenche o objeto
             alocSala.setSemestre(findSemLetivo.findById(cursor.getInt(1)));
             alocSala.setSala(findSala.findById(cursor.getInt(2)));
-            int aa = cursor.getInt(3);
             alocSala.setOferta(findOferta.findById(cursor.getInt(3)));
             result.add(alocSala);
             cursor.moveToNext();
@@ -141,9 +140,9 @@ public class AlocacaoSalaC {
     //Só vai ser chamado quando for feita a sincronia dos dados
     public void atualizar(AlocacaoSala dados) {
         ContentValues cv = new ContentValues();
-        cv.put("semestre", dados.getSemestre().getId());
-        cv.put("sala", dados.getSala().getId());
-        cv.put("oferta", dados.getOferta().getId());
+        cv.put("semestre", dados.getIdsemestre());
+        cv.put("sala", dados.getIdsala());
+        cv.put("oferta", dados.getIdoferta());
         db.update("AlocacaoSala", cv,  "id = ?", new String[]{String.valueOf(dados.getId())});
     }
 

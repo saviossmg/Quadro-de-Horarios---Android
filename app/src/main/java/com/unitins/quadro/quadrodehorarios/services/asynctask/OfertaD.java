@@ -119,7 +119,6 @@ public class OfertaD extends AsyncTask<String, Void, Void> {
             ResponseHandler<String> responseHandler = new BasicResponseHandler();
             //converte os bytes para String
             String response = client.execute(post,responseHandler);
-            Log.i("INFO","RETORNO: "+response);
             //transforma a string em objeto json
             alocacoes = vrGson.fromJson(response, ModeloAlocacao.class);
             stop = 1;
@@ -134,17 +133,18 @@ public class OfertaD extends AsyncTask<String, Void, Void> {
     protected void onPostExecute(Void result){
         //pós-execução
         super.onPostExecute(result);
-        barraProgresso.dismiss();
         if(stop == 1){
             //salva no banco de dados
             Toast.makeText(copia, alocacoes.getMensagem(), Toast.LENGTH_LONG).show();
             if(alocacoes.isStatus()){
                 //se vier dados, ele irá finalizar a intent
                 salvarBanco();
-                copia.finalizarIntent();
+                finalizar();
             }
+            copia.finalizarIntent();
         }
         if(stop == -1){
+            finalizar();
             Toast.makeText(copia, "Atenção: Dados não baixados.\nMotivo: "+msg, Toast.LENGTH_LONG).show();
         }
     }
@@ -157,27 +157,14 @@ public class OfertaD extends AsyncTask<String, Void, Void> {
         OfertaC vrOferta = new OfertaC(copia);
         Oferta auxoferta = null;
         for (Oferta aux: alocacoes.getOfer()){
-            Log.i("INFO", "ID "+aux.getId());
-            Log.i("INFO", "CURSO "+aux.getIdcurso());
-            Log.i("INFO", "DIA "+aux.getDiasemana());
-            Log.i("INFO", "PERIODO "+aux.getPeriodo());
-            Log.i("INFO", "DISCIPLINA "+aux.getDisciplina());
-            Log.i("INFO", "DESC. "+aux.getDescricaoperiodoletivo());
-            Log.i("INFO", "H11 "+aux.getHorainiciala());
-            Log.i("INFO", "H12 "+aux.getHorainicialb());
-            Log.i("INFO", "I1 "+aux.getIntervaloinicio());
-            Log.i("INFO", "I2 "+aux.getIntervalofim());
-            Log.i("INFO", "H21 "+aux.getHorafinala());
-            Log.i("INFO", "H22 "+aux.getHorafinalb() );
-            Log.i("INFO", "PROF "+aux.getProfessor());
-            Log.i("INFO", "TURNO "+aux.getTurno());
-            Log.i("INFO", "TURNO "+aux.getTurno());
 
             auxoferta = vrOferta.findById(aux.getId());
             if(auxoferta == null)
                 vrOferta.inserir(aux);
             else
-                vrOferta.atualizar(auxoferta);
+                vrOferta.atualizar(aux);
+
+
         }
         AlocacaoSalaC vrAlocacao = new AlocacaoSalaC(copia);
         AlocacaoSala auxaloc = null;
@@ -187,12 +174,15 @@ public class OfertaD extends AsyncTask<String, Void, Void> {
                 if(auxaloc == null)
                     vrAlocacao.inserir(aux);
                 else
-                    vrAlocacao.atualizar(auxaloc);
+                    vrAlocacao.atualizar(aux);
             } catch (ParseException e) {
                 Toast.makeText(copia, "Atenção: "+e.getMessage(), Toast.LENGTH_LONG).show();;
             }
-
         }
+    }
+
+    private void finalizar(){
+        barraProgresso.dismiss();
     }
 
 }

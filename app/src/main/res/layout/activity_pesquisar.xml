@@ -27,6 +27,23 @@
                 android:textSize="24sp"
                 android:textStyle="bold|italic"/>
 
+            <TextView
+                android:id="@+id/pesquisar_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="false"
+                android:layout_alignParentStart="false"
+                android:layout_below="@+id/pesquisar_titulo"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="false"
+                android:layout_marginLeft="70dp"
+                android:layout_marginTop="15dp"
+                android:text="Selecione os parâmetros."
+                android:textColor="@android:color/black"
+                android:textStyle="bold|italic" />
+
             <Spinner
                 android:id="@+id/pesquisar_semestre"
                 android:layout_width="match_parent"
@@ -35,7 +52,7 @@
                 android:layout_alignParentLeft="false"
                 android:layout_alignParentRight="false"
                 android:layout_alignParentStart="false"
-                android:layout_below="@+id/pesquisar_titulo"
+                android:layout_below="@+id/pesquisar_info"
                 android:layout_centerHorizontal="true"
                 android:layout_centerInParent="false"
                 android:layout_marginLeft="70dp"
@@ -133,7 +150,8 @@
                 android:layout_below="@+id/pesquisar_dia"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="15dp"
-                android:background="@color/botoes2"
+                android:background="@drawable/btn_azul"
+                android:textColor="@android:color/white"
                 android:text="OK" />
 
         </RelativeLayout>

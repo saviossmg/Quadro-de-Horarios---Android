@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
             <TextView
                 android:id="@+id/dethor_sala"
                 android:layout_width="match_parent"
@@ -30,105 +31,236 @@
                 android:textSize="24sp"
                 android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/dethor_semestre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:id="@+id/dethor_painel1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/dethor_sala"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp"
-                android:text="semestre"
-                android:textSize="18sp" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/dethor_curso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_semestre"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="curso"
-                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dethor_periodo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_curso"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:text="Periodo"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_semestre_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="SEMESTRE LETIVO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/dethor_dia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_periodo"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:text="segunda"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_curso_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="CURSO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
 
-            <TextView
-                android:id="@+id/dethor_turno"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_dia"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="turno"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_periodo_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="PERÍODO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/dethor_horario1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_turno"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="1 horario"
-                android:textSize="18sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/dethor_intervalo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_horario1"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="intervalo"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_semestre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="semestre" />
 
-            <TextView
-                android:id="@+id/dethor_horario2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_intervalo"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="2 horario"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_curso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="curso" />
 
-            <TextView
-                android:id="@+id/dethor_professor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_horario2"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="professor"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/dethor_periodo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="periodo" />
 
-            <TextView
-                android:id="@+id/dethor_local"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dethor_professor"
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/dethor_painel1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="local"
-                android:textSize="18sp" />
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="25dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dethor_dia_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="DIA DA SEMANA"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/dethor_turno_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="TURNO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+
+                    <TextView
+                        android:id="@+id/dethor_h1_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="1º HORÁRIO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/dethor_int_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="INTERVALO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/dethor_h2_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="2º HORÁRIO"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+                    <TextView
+                        android:id="@+id/dethor_local_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="LOCAL"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold|italic" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dethor_dia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="semestre" />
+
+                    <TextView
+                        android:id="@+id/dethor_turno"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="turno" />
+
+                    <TextView
+                        android:id="@+id/dethor_horario1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="h1" />
+
+                    <TextView
+                        android:id="@+id/dethor_intervalo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="int" />
+
+                    <TextView
+                        android:id="@+id/dethor_horario2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="h2" />
+
+                    <TextView
+                        android:id="@+id/dethor_local"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="h2" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--
+
+            -->
 
 
         </RelativeLayout>

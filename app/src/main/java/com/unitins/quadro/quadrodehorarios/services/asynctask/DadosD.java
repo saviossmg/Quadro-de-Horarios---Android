@@ -6,20 +6,25 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.unitins.quadro.quadrodehorarios.controllers.AlocacaoSalaC;
 import com.unitins.quadro.quadrodehorarios.controllers.CriptografiaC;
 import com.unitins.quadro.quadrodehorarios.controllers.CursoC;
+import com.unitins.quadro.quadrodehorarios.controllers.OfertaC;
 import com.unitins.quadro.quadrodehorarios.controllers.PredioC;
 import com.unitins.quadro.quadrodehorarios.controllers.SalaC;
 import com.unitins.quadro.quadrodehorarios.controllers.SemestreC;
 import com.unitins.quadro.quadrodehorarios.controllers.SemestreLetivoC;
 import com.unitins.quadro.quadrodehorarios.controllers.UnidadeC;
+import com.unitins.quadro.quadrodehorarios.models.AlocacaoSala;
 import com.unitins.quadro.quadrodehorarios.models.Curso;
+import com.unitins.quadro.quadrodehorarios.models.Oferta;
 import com.unitins.quadro.quadrodehorarios.models.Predio;
 import com.unitins.quadro.quadrodehorarios.models.Sala;
 import com.unitins.quadro.quadrodehorarios.models.Semestre;
 import com.unitins.quadro.quadrodehorarios.models.SemestreLetivo;
 import com.unitins.quadro.quadrodehorarios.models.Unidade;
 import com.unitins.quadro.quadrodehorarios.models.modelos.ModeloAlocacao;
+import com.unitins.quadro.quadrodehorarios.models.modelos.ModeloAlocacaoAtt;
 import com.unitins.quadro.quadrodehorarios.models.modelos.ModeloCurso;
 import com.unitins.quadro.quadrodehorarios.models.modelos.ModeloPredio;
 import com.unitins.quadro.quadrodehorarios.models.modelos.ModeloSala;
@@ -57,6 +62,9 @@ public class DadosD extends AsyncTask<String, Void, Void> {
     public int stop;
     private String msg = null;
     private ArrayList<String> enderecos = null;
+    private ArrayList<AlocacaoSala> listaAlocacao = null;
+    private ArrayList<AlocacaoSala> listaAlocatt = null;
+    private ArrayList<Oferta> listaOferta = null;
 
     //chave de acesso
     private CriptografiaC chave = null;
@@ -66,6 +74,7 @@ public class DadosD extends AsyncTask<String, Void, Void> {
     private HttpPost post = null;
     private List<NameValuePair> parametros = null;
     private Gson vrGson = null;
+    private AlocacaoSalaC alocc = null;
 
     private ModeloUnidade unidades = null;
     private ModeloPredio predios = null;
@@ -89,9 +98,16 @@ public class DadosD extends AsyncTask<String, Void, Void> {
         this.enderecos.add("https://alocacaosalas.unitins.br/getSemestre.php");
         this.enderecos.add("https://alocacaosalas.unitins.br/getSemestreletivo.php");
         this.enderecos.add("https://alocacaosalas.unitins.br/getCurso.php");
+        this.enderecos.add("https://alocacaosalas.unitins.br/attAlocacao.php");
 
         //chave
         this.chave = new CriptografiaC(contexto.getContext());
+
+        //alocacoes - caso necessários
+        this.listaAlocacao = new ArrayList<>();
+        this.listaAlocatt = new ArrayList<>();
+        this.listaOferta = new ArrayList<>();
+        this.alocc = new AlocacaoSalaC(contexto.getContext());
     }
 
     //prepara para a execução da thread
@@ -137,6 +153,27 @@ public class DadosD extends AsyncTask<String, Void, Void> {
                 if(i==3){ semestres = vrGson.fromJson(response, ModeloSemestre.class); }
                 if(i==4){ semestresletivos = vrGson.fromJson(response, ModeloSemestreLetivo.class); }
                 if(i==5){ cursos = vrGson.fromJson(response, ModeloCurso.class); }
+                if(i==6){
+                    //se tiver alocacoes ele irá atualizar apenas as que estão no banco
+                    listaAlocacao = alocc.listar(false,0,0,-1,0,0,0,true);
+                    if(!listaAlocacao.isEmpty()){
+                        ModeloAlocacaoAtt auxatt = null;
+                        //se a lista não estiver vazia, irá baixar as alocacoes e adicionar ao modelo
+                        for(AlocacaoSala a: listaAlocacao){
+                            //limpa a lista de parametros e adiciona mais uma vez
+                            parametros.clear();
+                            parametros.add(new BasicNameValuePair("hash", chave.findById(1).getChave()));
+                            parametros.add(new BasicNameValuePair("idalocacao", String.valueOf(a.getId())));
+                            //coloca o paraemtro post na requisição
+                            post.setEntity(new UrlEncodedFormEntity(parametros));
+                            //executa a requisição e converte para string
+                            response = client.execute(post,responseHandler);
+                            auxatt = vrGson.fromJson(response, ModeloAlocacaoAtt.class);
+                            listaAlocatt.add(auxatt.getAloc());
+                            listaOferta.add(auxatt.getOfer());
+                        }
+                    }
+                }
             }
             stop = 1;
         } catch (Exception e){
@@ -172,7 +209,7 @@ public class DadosD extends AsyncTask<String, Void, Void> {
     private void salvarBanco() throws ParseException {
         //verifica primeiro se existem registros
         //Caso não haja nada, ele ira inserir um novo, se não ele irá atualizar
-        //na ordem: unidade, predio, sala, semestre, semestreletivo, curso
+        //na ordem: unidade, predio, sala, semestre, semestreletivo, curso e oferta (se tiver)
         UnidadeC unic = new UnidadeC(copia.getContext());
         Unidade auxUni = null;
         for (Unidade a: unidades.getData()){
@@ -185,6 +222,7 @@ public class DadosD extends AsyncTask<String, Void, Void> {
                 unic.atualizar(a);
 
         }
+        //controler e objeto auxiliares
         PredioC predc = new PredioC(copia.getContext());
         Predio auxPred = null;
         for (Predio a: predios.getData()){
@@ -245,8 +283,32 @@ public class DadosD extends AsyncTask<String, Void, Void> {
                 cursc.atualizar(a);
 
         }
+        //se não tiver vazia ele atualiza
+        if(!listaAlocacao.isEmpty()){
+            OfertaC oferc = new OfertaC(copia.getContext());
+            Oferta auxOfer = null;
+            AlocacaoSalaC alocc = new AlocacaoSalaC(copia.getContext());
+            AlocacaoSala auxAloc = null;
 
+            //oferta primeiro, pois ele pode precisar inserir uma nova
+            for(Oferta a: listaOferta){
+                Log.i("INFO",a.getDiasemana());
+                auxOfer = oferc.findById(a.getId());
+                if(auxOfer == null){
+                    //atualiza
+                    oferc.inserir(a);
+                }
+                else{
+                    oferc.atualizar(a);
+                }
+            }
+            //oferta só atualiza
+            for(AlocacaoSala a: listaAlocatt){
+                //cria um objeto novo com as referencias da atualização, pois necessita atualização
+                  alocc.atualizar(a);
+            }
 
+        }
 
     }
 

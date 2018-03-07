@@ -3,7 +3,11 @@
     <color name="colorPrimary">#2036b1</color>
     <color name="colorPrimaryDark">#142170</color>
     <color name="colorAccent">#e4c606</color>
+    <color name="rosa">#e4067c</color>
     <color name="botoes">#64184461</color>
+    <color name="letracinza">#64d9d9d9</color>
+    <color name="letrabranca">#ffffff</color>
     <color name="botoes2">#bd142170</color>
     <color name="botoes3">#3c949494</color>
+    <color name="amarelo">#e4c606</color>
 </resources>

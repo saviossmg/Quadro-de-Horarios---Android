@@ -38,7 +38,7 @@ public class HorarioDetalhes extends AppCompatActivity {
         horario1 = (TextView) findViewById(R.id.dethor_horario1);
         intervalo = (TextView) findViewById(R.id.dethor_intervalo);
         horario2 = (TextView) findViewById(R.id.dethor_horario2);
-        professor = (TextView) findViewById(R.id.dethor_professor);
+//        professor = (TextView) findViewById(R.id.dethor_professor);
         local = (TextView) findViewById(R.id.dethor_local);
 
         //pega o valor da itent
@@ -47,8 +47,8 @@ public class HorarioDetalhes extends AppCompatActivity {
         //seta os cammpos
         sala.setText(dados.getExtras().getString("sala"));
 
-        semestre.setText("SEMESTRE LETIVO:\t"+dados.getExtras().getString("semestre"));
-        curso.setText("CURSO:\t"+dados.getExtras().getString("curso"));
+        semestre.setText(dados.getExtras().getString("semestre"));
+        curso.setText(dados.getExtras().getString("curso"));
 
         String per = null;
         if(dados.getExtras().getInt("periodo") == 0)
@@ -56,24 +56,24 @@ public class HorarioDetalhes extends AppCompatActivity {
         else
             per = dados.getExtras().getInt("periodo")+"º Período";
 
-        periodo.setText("PERÍODO:\t"+per);
+        periodo.setText(per);
 
-        dia.setText("DIA:\t"+dados.getExtras().getString("dia"));
-        turno.setText("TURNO:\t"+dados.getExtras().getString("turno"));
-        horario1.setText("1º Horário: "+dados.getExtras().getString("horario1"));
+        dia.setText(dados.getExtras().getString("dia"));
+        turno.setText(dados.getExtras().getString("turno"));
+        horario1.setText(dados.getExtras().getString("horario1"));
 
         if(dados.getExtras().getString("intervalo") == null)
             intervalo.setText("Sem Intervalo.");
         else
-            intervalo.setText("INTERVALO:\t"+dados.getExtras().getString("intervalo"));
+            intervalo.setText(dados.getExtras().getString("intervalo"));
 
         if(dados.getExtras().getString("horario2") == null)
             horario2.setText("Sem 2º horário.");
         else
-            horario2.setText("2º HORÁRIO:\t"+dados.getExtras().getString("horario2"));
+            horario2.setText(dados.getExtras().getString("horario2"));
 
-        professor.setText("PROFESSOR(A):\t"+dados.getExtras().getString("professor"));
-        local.setText("LOCAL:\t"+dados.getExtras().getString("local"));
+//        professor.setText(dados.getExtras().getString("professor"));
+        local.setText(dados.getExtras().getString("local"));
 
     }
 

@@ -32,7 +32,7 @@
             android:contextClickable="false"
             android:elegantTextHeight="false"
             android:freezesText="false"
-            android:text="Bem vindo ao aplicativo de Quadro de Horários da UNITINS."
+            android:text="Bem vindo ao aplicativo do Guia Acadêmico da UNITINS."
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@android:color/black"

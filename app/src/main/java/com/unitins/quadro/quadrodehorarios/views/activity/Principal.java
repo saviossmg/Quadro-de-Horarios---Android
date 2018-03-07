@@ -60,7 +60,7 @@ public class Principal extends AppCompatActivity {
         System.out.println(findOferta.listar());
 
         //referencias visuais adicionadas ao controlador da activity
-        getSupportActionBar().setTitle("Quadro de Horários - UNITINS");
+        getSupportActionBar().setTitle(getResources().getString(R.string.app_name)+" - UNITINS");
 
         vrViewpager = (ViewPager) findViewById(R.id.principal_viewpager);
 
@@ -158,15 +158,15 @@ public class Principal extends AppCompatActivity {
                         }
                         else{
                             //altera as preferencias
-//                            if(curso != 0){
-//                                Preferencias.setInt(this,"curso",curso);
-//                                Preferencias.setBoolean(this, "salvo",true);
-//                            }
-//
-//                            if(semestre != 0){
-//                                Preferencias.setInt(this,"semestre",semestre);
-//                                Preferencias.setBoolean(this, "salvo",true);
-//                            }
+                            if(curso != 0){
+                                Preferencias.setInt(this,"curso",curso);
+                                Preferencias.setBoolean(this, "salvo",true);
+                            }
+
+                            if(semestre != 0){
+                                Preferencias.setInt(this,"semestre",semestre);
+                                Preferencias.setBoolean(this, "salvo",true);
+                            }
                             mensagem = "Lista alterada de acordo com os filtros selecionados.";
                             //recarrega o conteudo da fragment
                             FragmentConsultas fragment = (FragmentConsultas) vpAdapter.getItem(2);
@@ -190,62 +190,3 @@ public class Principal extends AppCompatActivity {
     }
 
 }
-
-/*
-
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/celhorario_dia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.64"
-            android:text="dia semana"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:textStyle="bold|italic" />
-
-        <TextView
-            android:id="@+id/celhorario_local"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="local"
-            android:textAlignment="center" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="51dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/celhorario_disciplina"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="disciplina"
-            android:textAlignment="center"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@android:color/darker_gray" />
-
-</LinearLayout>
-
- */

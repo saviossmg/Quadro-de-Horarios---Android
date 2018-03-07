@@ -48,9 +48,9 @@
         android:id="@+id/consulta_btnrecarregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/consulta_btnsincronizar"
-        android:layout_alignLeft="@+id/consulta_btnsincronizar"
-        android:layout_alignStart="@+id/consulta_btnsincronizar"
+        android:layout_above="@+id/consulta_btnshow"
+        android:layout_alignEnd="@+id/consulta_btnshow"
+        android:layout_alignRight="@+id/consulta_btnshow"
         android:layout_marginBottom="10dp"
         android:clickable="true"
         android:src="@drawable/recarregar"
@@ -61,13 +61,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/consulta_btnshow"
         android:clickable="true"
         android:src="@drawable/sincronizar"
         app:backgroundTint="@color/colorAccent" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/consulta_btnshow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="5dp"
+        android:clickable="true"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/colorPrimary"
+        app:fabSize="normal" />
 
 </RelativeLayout>

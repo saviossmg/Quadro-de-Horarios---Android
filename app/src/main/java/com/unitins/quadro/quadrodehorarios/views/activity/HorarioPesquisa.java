@@ -294,7 +294,7 @@ public class HorarioPesquisa extends AppCompatActivity implements View.OnClickLi
 
         //cria um objeto com id 0 para descricao;
         aux.setId(0);
-        aux.setDescricao("SEMESTRE");
+        aux.setDescricao("SEMESTRE - Obrigatório selecionar");
         semestres.add(aux);
 
         //foreach para preencher
@@ -307,12 +307,12 @@ public class HorarioPesquisa extends AppCompatActivity implements View.OnClickLi
         this.periodos = new ArrayList<Periodo>();
 
         Periodo aux = new Periodo();
-        aux.setDescricao("PERIODO");
+        aux.setDescricao("PERÍODO");
         aux.setNum(-1);
         this.periodos.add(aux);
 
         aux = new Periodo();
-        aux.setDescricao("Regulizaração/Especial");
+        aux.setDescricao("Regularização/Especial");
         aux.setNum(0);
         this.periodos.add(aux);
 

@@ -7,8 +7,8 @@ android {
         applicationId "com.unitins.quadro.quadrodehorarios"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 2
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,4 +34,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.stanfy:gson-xml-java:0.1.7'
+    compile 'com.google.android.gms:play-services-maps:10.2.1'
 }
